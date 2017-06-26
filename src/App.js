@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
-import Header from './components/Header'; // Import a component from another file
-import LoginPage from './components/LoginPage'; // Import a component from another file
+import Header from './components/common/Header'; // Import a component from another file
+import LoginPage from './components/login/LoginPage'; // Import a component from another file
 import './App.css';
 
 class App extends Component {
