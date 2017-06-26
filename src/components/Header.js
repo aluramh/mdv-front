@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 function LoggedInNavbar (props) {
     return (
@@ -11,9 +12,9 @@ function LoggedInNavbar (props) {
                 <MenuItem divider />
                 <MenuItem eventKey={3.4}>Separated link</MenuItem>
             </NavDropdown>
-            <NavItem href="/vehiculos">
-                <span>&nbsp;Vehicles</span>
-            </NavItem>
+            <LinkContainer to="/main">
+               <NavItem eventKey={4}>Vehiculos</NavItem>
+            </LinkContainer>
         </Nav>
     );
 }
@@ -29,6 +30,7 @@ function LoggedOutNavbar (props) {
                 <span className="glyphicon glyphicon-log-in"></span>
                 <span>&nbsp;Log in</span>
             </NavItem>
+            <LinkContainer to="/about">About</LinkContainer>
         </Nav>
     );
 }
@@ -48,8 +50,8 @@ class HeaderComponent extends Component {
         <Navbar>
             <div className="container">
                 <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="/">
+                    <Navbar.Brand href="/">
+                        <a >
                             <span className="glyphicon icon-cars"></span>
                             <span>Manejo de vehiculos RASE</span>
                         </a>
