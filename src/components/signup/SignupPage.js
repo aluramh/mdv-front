@@ -9,7 +9,7 @@ import {
     Row, Col
 } from 'react-bootstrap';
 
-class LoginPage extends Component {
+class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,11 +37,12 @@ class LoginPage extends Component {
   render() {
     return (
       <div className="container">
-        <PageHeader>Login</PageHeader>
+        <PageHeader>Signup</PageHeader>
         <Row>
           <Col xs={12} md={6} mdOffset={3}>
             <Jumbotron className="vertical-center" >
               <form onSubmit={this.handleSubmit}>
+                {/* Username */}
                 <FormGroup controlId="formBasicText">
                   <ControlLabel>Usuario</ControlLabel>
                   <FormControl 
@@ -51,6 +52,7 @@ class LoginPage extends Component {
                     onChange={this.handleChangeUsername}>
                   </FormControl>
                 </FormGroup>
+                {/* Password */}
                 <FormGroup>
                   <ControlLabel>Contraseña</ControlLabel>
                   <FormControl
@@ -60,8 +62,17 @@ class LoginPage extends Component {
                     onChange={this.handleChangePassword}>
                   </FormControl>
                 </FormGroup>
-
-                <Button bsStyle="primary" type="submit">Ingresar</Button>
+                {/* Name */}
+                <FormGroup>
+                  <ControlLabel>Contraseña</ControlLabel>
+                  <FormControl
+                    type="password" 
+                    placeholder="Ingresa la contraseña"
+                    value={this.state.password}
+                    onChange={this.handleChangePassword}>
+                  </FormControl>
+                </FormGroup>
+                <Button bsStyle="primary" type="submit">Create new account</Button>
               </form>
             </Jumbotron>
           </Col>
@@ -71,4 +82,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage; // Don’t forget to use export default!
+export default SignupPage;
