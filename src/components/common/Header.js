@@ -1,72 +1,82 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import {
+  AppBar, FlatButton, IconButton, FontIcon,
+  Drawer, MenuItem, RaisedButton, IconMenu
+} from 'material-ui'
+// Icons
+import Menu from 'material-ui/svg-icons/navigation/menu';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-function LoggedInNavbar (props) {
+const styles = {
+  title: { cursor: 'pointer' },
+  menu: { color: 'white' }
+};
+
+const NavDrawer = ({open, handleClose, handleRequestChange}) => {
   return (
-    <Nav pullLeft>
-      <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-        <MenuItem eventKey={3.1}>Action</MenuItem>
-        <MenuItem eventKey={3.2}>Another action</MenuItem>
-        <MenuItem eventKey={3.3}>Something else here</MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={3.4}>Separated link</MenuItem>
-      </NavDropdown>
-      <LinkContainer to="/main">
-        <NavItem eventKey={4}>Vehiculos</NavItem>
-      </LinkContainer>
-    </Nav>
+    <div>
+      <Drawer
+        docked={false}
+        width={250}
+        open={open}
+        onRequestChange={handleRequestChange}>
+        <MenuItem onClick={handleClose}>Menu Item</MenuItem>
+        <MenuItem onClick={handleClose}>Menu Item 2</MenuItem>
+      </Drawer>
+    </div>
   );
 }
 
-function LoggedOutNavbar (props) {
+const TopLeft = ({handleToggle}) => {
   return (
-    <Nav pullRight>
-      <NavItem href="/signup">
-        <span className="glyphicon glyphicon-user"></span>
-        <span>&nbsp;Sign Up</span>
-      </NavItem>
-      <NavItem href="/login">
-        <span className="glyphicon glyphicon-log-in"></span>
-        <span>&nbsp;Log in</span>
-      </NavItem>
-      <LinkContainer to="/about">
-        <NavItem>About</NavItem>
-      </LinkContainer>
-    </Nav>
-  );
+    <IconButton onClick={handleToggle}>
+      <Menu color={styles.menu.color}/>
+    </IconButton>
+  )
 }
 
-class HeaderComponent extends Component {
-  render() {
-    let isLoggedIn = false;
-    let navbarContent = null;
+const TopRight = (props) => {
+  return (
+    <IconMenu
+      iconButtonElement={
+        <IconButton><MoreVertIcon /></IconButton>
+      }
+      targetOrigin={{horizontal: 'right', vertical: 'top'}}
+      anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
+      <MenuItem primaryText="My Account" />
+      <MenuItem primaryText="Sign out" />
+    </IconMenu>
+  )
+}
 
-    if (isLoggedIn === true) {
-      navbarContent = <LoggedInNavbar/>;
-    } else {
-      navbarContent = <LoggedOutNavbar/>;
-    }
-    
+class Header extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  };
+
+  handleToggle = () => this.setState({open: !this.state.open});
+  handleClose = () => this.setState({open: false});
+  handleRequestChange = (open) => this.setState({open})
+
+  render () {
     return (
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand href="/">
-            <a>
-              <span className="glyphicon icon-cars"></span>
-              <span>Manejo de vehiculos RASE</span>
-            </a>
-          </Navbar.Brand>
-          <Navbar.Toggle/>
-        </Navbar.Header>
-
-        {/*Part of the navbar that will collapse in mobile view*/}
-        <Navbar.Collapse>
-          {navbarContent}
-        </Navbar.Collapse>
-      </Navbar>
+      <div>
+        <AppBar
+          title={<span style={styles.title}>Title</span>}
+          iconElementLeft={<TopLeft handleToggle={this.handleToggle} />}
+          iconElementRight={<TopRight />}>
+        </AppBar>
+        <NavDrawer 
+          open={this.state.open}
+          handleClose={this.handleClose}
+          handleRequestChange={this.handleRequestChange}>
+        </NavDrawer>
+      </div>
     )
   }
-}
+};
 
-export default HeaderComponent; // Don’t forget to use export default!
+export default Header;
