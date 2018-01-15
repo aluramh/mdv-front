@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import './ProfilePage.css'
+import './../common/Container.css'
+
 import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
 } from 'material-ui/ExpansionPanel';
-import Typography from 'material-ui/Typography';
+import { Typography, Paper, Grid } from 'material-ui';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 const styles = theme => ({
@@ -21,34 +24,24 @@ const styles = theme => ({
 function SimpleExpansionPanel(props) {
   const { classes } = props;
   return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Expansion Panel 1</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Expansion Panel 2</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel disabled>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
-        </ExpansionPanelSummary>
-      </ExpansionPanel>
+    <div className="container profile-container">
+      <Grid container>
+        {/* User settings */}
+        <Grid item xs={12} sm={4}>
+          <Paper className={classes.paper}>
+            <Typography>Username</Typography>
+          </Paper>
+        </Grid>
+
+        {/* User Details */}
+        <Grid item xs={12} sm={8}>
+          <Paper className={classes.paper}>
+            <Typography>
+              User info
+            </Typography>
+          </Paper>
+        </Grid>
+      </Grid>
     </div>
   );
 }

@@ -1,74 +1,93 @@
-// import React, { Component } from 'react';
-// import { 
-//     FormGroup, 
-//     ControlLabel, 
-//     FormControl, 
-//     Button, 
-//     Jumbotron, 
-//     PageHeader,
-//     Row, Col
-// } from 'react-bootstrap';
+import React, { Component } from 'react';
+import axios from 'axios'
+import { withRouter } from 'react-router-dom'
+import { TextField, Button, Paper } from 'material-ui';
+import './LoginPage.css'
 
-// class LoginPage extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//         username: '',
-//         password: ''
-//     };
-//     this.handleChangeUsername = this.handleChangeUsername.bind(this);
-//     this.handleChangePassword = this.handleChangePassword.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }     
+class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      validName: true,
+      password: '',
+      validPass: true
+    }
+  }
 
-//   handleChangeUsername(event) {
-//     this.setState({username: event.target.value});
-//   }
+  handleUsernameChange = (e) => {
+    const name = e.target.value
+    this.setState({ name: e.target.value })
 
-//   handleChangePassword(event) {
-//     this.setState({password: event.target.value});
-//   }
+    if (name.length < 6) {
+      this.setState({validName: false})
+    } else {
+      this.setState({validName: true})
+    }
+  }
+  
+  handlePasswordChange = (e) => {
+    this.setState({ password: e.target.value })
+  }
 
-//   handleSubmit(event) {
-//     alert('Credentials: ' + [this.state.username, this.state.password]);
-//     event.preventDefault();
-//   }
+  handleLoginFormSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      username: this.state.name, 
+      password: this.state.password
+    }
+  
+    axios.post('http://localhost:3000/login', formData).then(res => {
+      console.log('Successful login.')
+      this.props.history.push('/profile')
+    }).catch(e => {
+      console.error(e)
+    })
+  }
 
-//   render() {
-//     return (
-//       <div className="container">
-//         <PageHeader>Login</PageHeader>
-//         <Row>
-//           <Col xs={12} md={6} mdOffset={3}>
-//             <Jumbotron className="vertical-center" >
-//               <form onSubmit={this.handleSubmit}>
-//                 <FormGroup controlId="formBasicText">
-//                   <ControlLabel>Usuario</ControlLabel>
-//                   <FormControl 
-//                     type="text" 
-//                     placeholder="Ingresa el nombre de usuario"
-//                     value={this.state.username}
-//                     onChange={this.handleChangeUsername}>
-//                   </FormControl>
-//                 </FormGroup>
-//                 <FormGroup>
-//                   <ControlLabel>Contraseña</ControlLabel>
-//                   <FormControl
-//                     type="password" 
-//                     placeholder="Ingresa la contraseña"
-//                     value={this.state.password}
-//                     onChange={this.handleChangePassword}>
-//                   </FormControl>
-//                 </FormGroup>
+  validateUsername = (e) => {
+    console.log('Form', e)
+  }
 
-//                 <Button bsStyle="primary" type="submit">Ingresar</Button>
-//               </form>
-//             </Jumbotron>
-//           </Col>
-//         </Row>
-//       </div>
-//     );
-//   }
-// }
+  render() {
+    const { classes } = this.props;
+    console.log(classes.button)
 
-// export default LoginPage; // Don’t forget to use export default!
+    return (
+      <Paper className="login-form-container">
+        <form 
+          // autoComplete="off"
+          className="login-form"
+          method="post" 
+          action="#"
+          onSubmit={this.handleLoginFormSubmit}>
+          <TextField
+            required
+            error={this.validName === false}
+            label="Username"
+            className={classes.textField}
+            value={this.state.name}
+            onChange={this.handleUsernameChange}
+            margin="normal">
+          </TextField>
+          <TextField
+            required
+            label="Password"
+            className={classes.textField}
+            type="password"
+            onChange={this.handlePasswordChange}
+            margin="normal">
+          </TextField>
+          <Button
+            type="submit" 
+            raised color="primary" 
+            className="btn-login">
+            Log in
+          </Button>
+        </form>
+      </Paper>
+    );
+  }
+}
+
+export default withRouter(LoginPage);

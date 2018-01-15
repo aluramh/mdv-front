@@ -1,0 +1,15 @@
+.login-form-container {
+  max-width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 15px;
+  .login-form {
+    display: flex;
+    align-items: center !important;
+    flex-direction: column;
+    .btn-login {
+      max-width: 120px;
+      margin: 15px 0 12px 0;
+    }
+  }
+}

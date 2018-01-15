@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Header from './components/common/AppHeader';
-// import LoginPage from './components/login/LoginPage';
+import LoginPage from './components/login/LoginPage';
 // import SignupPage from './components/signup/SignupPage';
 import ProfilePage from './components/profile/ProfilePage';
 import theme from './AppThemes'
@@ -28,6 +28,18 @@ const styles = theme => ({
     // width: '100%',
     height: '100%',
     minHeight: '430px'
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
   },
   appBarText: {
     flex: 1
@@ -73,10 +85,10 @@ class App extends Component {
             <Header classes={classes}></Header>
             <main className={classes.content}>
               <Router>
-                {/* <Route path="/login" component={LoginPage}/> */}
-                {/* <PropsRoute path='/allbooks' component={Books} booksGetter={getAllBooks}></PropsRoute> */}
-                <Route path="/" render={routeProps => <ProfilePage classes={classes} />}/>
-                {/* <Route path="/signup" component={SignupPage}/> */}
+                <div>
+                  <Route path="/login" render={routeProps => <LoginPage classes={classes} />}/>
+                  <Route path="/profile" render={routeProps => <ProfilePage classes={classes} />}/>
+                </div>
               </Router>
             </main>
           </div>

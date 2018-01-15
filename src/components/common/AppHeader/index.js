@@ -46,7 +46,7 @@ class MenuAppBar extends Component {
     this.state = {
       auth: true,
       anchorEl: null,
-      open: true
+      open: false
     };
   }  
 
