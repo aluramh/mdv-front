@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { TextField, Button, Paper } from 'material-ui';
-import './LoginPage.css'
 
 class LoginPage extends Component {
   constructor(props) {
@@ -12,6 +11,15 @@ class LoginPage extends Component {
       validName: true,
       password: '',
       validPass: true
+    }
+  }
+
+  componentWillMount = () => {
+    console.log('logged?', this.props)
+
+    if (this.props.isLogged === true) {
+      console.log('user is logged. redirecting...')
+      this.props.history.push('/profile')
     }
   }
 
@@ -38,7 +46,10 @@ class LoginPage extends Component {
     }
   
     axios.post('http://localhost:3000/login', formData).then(res => {
-      console.log('Successful login.')
+      const userData = res.data.data
+      console.log('Successful login.', userData)
+
+      this.props.setUser(userData)
       this.props.history.push('/profile')
     }).catch(e => {
       console.error(e)
@@ -51,8 +62,7 @@ class LoginPage extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(classes.button)
-
+  
     return (
       <Paper className="login-form-container">
         <form 

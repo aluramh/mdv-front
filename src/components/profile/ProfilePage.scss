@@ -1,3 +1,11 @@
 .profile-container {
   padding: 15px;
+  .user-section, .user-items-section {
+    padding: 15px;
+    .avatar {
+      $size: 100px;
+      height: $size;
+      width: $size;
+    }
+  }
 }

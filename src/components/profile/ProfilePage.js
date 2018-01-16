@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import './ProfilePage.css'
 import './../common/Container.css'
-
-import ExpansionPanel, {
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-} from 'material-ui/ExpansionPanel';
-import { Typography, Paper, Grid } from 'material-ui';
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
+import { Typography, Paper, Grid, Avatar } from 'material-ui';
 
 const styles = theme => ({
   root: {
@@ -22,20 +16,24 @@ const styles = theme => ({
 });
 
 function SimpleExpansionPanel(props) {
-  const { classes } = props;
   return (
     <div className="container profile-container">
+      <pre>{JSON.stringify(props.user)}</pre>
       <Grid container>
         {/* User settings */}
         <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>
+          <Paper className="user-section">
+            <Avatar
+              src="https://pbs.twimg.com/media/DKDRupwXcAYLfCK.jpg"
+              className="avatar">
+            </Avatar>
             <Typography>Username</Typography>
           </Paper>
         </Grid>
 
         {/* User Details */}
         <Grid item xs={12} sm={8}>
-          <Paper className={classes.paper}>
+          <Paper className="user-items-section">
             <Typography>
               User info
             </Typography>
