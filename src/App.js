@@ -6,6 +6,7 @@ import {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Header from './components/common/AppHeader';
 import LoginPage from './components/login/LoginContainer';
+import Home from './components/home/Home'
 // import SignupPage from './components/signup/SignupPage';
 import ProfilePage from './components/profile/ProfilePageContainer';
 import { styles, AppTheme as theme } from './AppThemes'
@@ -15,8 +16,8 @@ import { withStyles } from 'material-ui/styles';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import raseApp from './redux/reducers'
+
 let store = createStore(raseApp)
-console.log(store)
 
 class App extends Component {
   render() {
@@ -31,8 +32,9 @@ class App extends Component {
               <main className={classes.content}>
                 <Router>
                   <div>
-                    <Route path="/login" component={LoginPage}/>
-                    <Route path="/profile" component={ProfilePage}/>
+                    <Route path="/" exact component={Home} />
+                      <Route path="/login" component={LoginPage}/>
+                      <Route path="/profile" component={ProfilePage}/>
                   </div>
                 </Router>
               </main>

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import { withRouter } from 'react-router-dom'
 import './ProfilePage.css'
 import './../common/Container.css'
 import { Typography, Paper, Grid, Avatar } from 'material-ui';
+
+import userApi from './../../api/user'
 
 const styles = theme => ({
   root: {
@@ -15,37 +18,53 @@ const styles = theme => ({
   },
 });
 
-function SimpleExpansionPanel(props) {
-  return (
-    <div className="container profile-container">
-      <pre>{JSON.stringify(props.user)}</pre>
-      <Grid container>
-        {/* User settings */}
-        <Grid item xs={12} sm={4}>
-          <Paper className="user-section">
-            <Avatar
-              src="https://pbs.twimg.com/media/DKDRupwXcAYLfCK.jpg"
-              className="avatar">
-            </Avatar>
-            <Typography>Username</Typography>
-          </Paper>
-        </Grid>
+class ProfilePage extends Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+  componentWillMount = () => {
+    if (this.props.isLogged === false) {
+      this.props.history.push('/login')
+    }
+  };
 
-        {/* User Details */}
-        <Grid item xs={12} sm={8}>
-          <Paper className="user-items-section">
-            <Typography>
-              User info
-            </Typography>
-          </Paper>
+  showUserSession = () => {
+    userApi.getCurrentSession(res => {
+      console.log('Session', res)
+    })
+  }
+
+  render () {
+    return (
+      <div className="container profile-container">
+        <pre>{JSON.stringify(this.props.user)}</pre>
+        <button onClick={this.showUserSession}>Show session</button>
+        <Grid container>
+          {/* User settings */}
+          <Grid item xs={12} sm={4}>
+            <Paper className="user-section">
+              <Avatar
+                src="https://pbs.twimg.com/media/DKDRupwXcAYLfCK.jpg"
+                className="avatar">
+              </Avatar>
+              <Typography>Username</Typography>
+            </Paper>
+          </Grid>
+  
+          {/* User Details */}
+          <Grid item xs={12} sm={8}>
+            <Paper className="user-items-section">
+              <Typography>
+                User info
+              </Typography>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
-SimpleExpansionPanel.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(SimpleExpansionPanel);
+export default withRouter(withStyles(styles)(ProfilePage));

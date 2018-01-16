@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import { withStyles } from 'material-ui/styles';
 import { withRouter } from 'react-router-dom'
 import { TextField, Button, Paper } from 'material-ui';
+import { isEmpty as _isEmpty } from 'lodash'
+import userApi from './../../api/user'
+import './LoginPage.css'
+
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  }
+});
 
 class LoginPage extends Component {
   constructor(props) {
@@ -15,12 +26,12 @@ class LoginPage extends Component {
   }
 
   componentWillMount = () => {
-    console.log('logged?', this.props)
-
-    if (this.props.isLogged === true) {
-      console.log('user is logged. redirecting...')
-      this.props.history.push('/profile')
-    }
+    userApi.getCurrentSession(user => {
+      if (!_isEmpty(user)) {
+        this.props.setUser(user)
+        this.props.history.push('/profile')
+      }
+    })
   }
 
   handleUsernameChange = (e) => {
@@ -44,15 +55,9 @@ class LoginPage extends Component {
       username: this.state.name, 
       password: this.state.password
     }
-  
-    axios.post('http://localhost:3000/login', formData).then(res => {
-      const userData = res.data.data
-      console.log('Successful login.', userData)
-
-      this.props.setUser(userData)
+    userApi.submitLogin(formData, user => {
+      this.props.setUser(user)
       this.props.history.push('/profile')
-    }).catch(e => {
-      console.error(e)
     })
   }
 
@@ -100,4 +105,4 @@ class LoginPage extends Component {
   }
 }
 
-export default withRouter(LoginPage);
+export default withRouter(withStyles(styles)(LoginPage));
