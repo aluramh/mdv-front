@@ -1,11 +1,45 @@
+$sm: 540px;
+$md: 720px;
+$lg: 992px;
+$xl: 1200px;
+
 .profile-container {
   padding: 15px;
   .user-section, .user-items-section {
-    padding: 15px;
+    padding: 20px;
+  }
+  .user-section {
+    display: flex;
+    flex-flow: column;
+    text-align: center;
     .avatar {
       $size: 100px;
       height: $size;
       width: $size;
+      align-self: center;
     }
+  }
+  .user-items-section {
+    .user-attribute {
+      width: 120px;
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+    .user-attribute-value {
+      max-width: 400px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .profile-table {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: $lg) {
+  .profile-container {
+    width: initial !important;
   }
 }

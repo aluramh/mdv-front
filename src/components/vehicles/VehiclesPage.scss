@@ -1,0 +1,35 @@
+$sm: 540px;
+$md: 720px;
+$lg: 992px;
+$xl: 1200px;
+
+.vehicles-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  // justify-content: center !important;
+
+  .card.vehicle {
+    width: 310px;
+    @media (max-width: $lg) { width: 100% }
+    .vehicle-card-table {
+      font-size: 12px;
+      .table.header {
+        color: rgba(0, 0, 0, 0.54);
+        width: 80px;
+        padding: 0;
+      }
+    }
+    p { font-size: 12px }
+  }
+}
+
+@media (max-width: $lg) {
+  .vehicles-container {
+    padding: 0 !important;
+    justify-content: center;
+    .card.vehicle > div {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

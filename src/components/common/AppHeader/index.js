@@ -2,22 +2,26 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { AppBar, Toolbar, Typography, IconButton } from 'material-ui';
 import Menu, { MenuItem } from 'material-ui/Menu';
+
 // Icons
 import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 
 import AppDrawer from './AppDrawer'
 
-const LoggedInNav = ({open, anchorEl, handleMenu, handleClose}) => {
+
+const LoggedInNav = ({open, anchorEl, handleMenu, handleClose, history}) => {
   return (
     <div>
       <IconButton
         aria-owns={open ? 'menu-appbar' : null}
         aria-haspopup="true"
         onClick={handleMenu}
-        color="contrast">
+        color="inherit">
         <AccountCircle />
       </IconButton>
       <Menu
@@ -31,11 +35,10 @@ const LoggedInNav = ({open, anchorEl, handleMenu, handleClose}) => {
           vertical: 'top',
           horizontal: 'right',
         }}
-        open={open}
-        onClose={handleClose}>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-      </Menu>
+        open={open}>
+          <MenuItem onClick={handleClose}><Link to="/profile">My Account</Link></MenuItem>
+          <MenuItem onClick={handleClose}>Log out</MenuItem>
+        </Menu>
     </div>
   )
 }
@@ -62,7 +65,8 @@ class MenuAppBar extends Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
+  handleClose = (e) => {
+    console.log(e.target)
     this.setState({ anchorEl: null });
   };
 
@@ -81,7 +85,7 @@ class MenuAppBar extends Component {
           <Toolbar>
             <IconButton 
               className={classes.drawerButton} 
-              color="contrast" 
+              color="inherit" 
               onClick={this.toggleDrawer}>
               <MenuIcon />
             </IconButton>
@@ -91,7 +95,8 @@ class MenuAppBar extends Component {
                   open={openOverflowMenu}
                   anchorEl={anchorEl}
                   handleClose={this.handleClose}
-                  handleMenu={this.handleMenu}/> 
+                  handleMenu={this.handleMenu}
+                  history={this.props.history}/> 
               : ''}
           </Toolbar>
         </AppBar>
@@ -105,4 +110,4 @@ class MenuAppBar extends Component {
   }
 }
 
-export default MenuAppBar;
+export default withRouter(MenuAppBar);

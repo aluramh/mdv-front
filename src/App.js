@@ -4,11 +4,14 @@ import {
   Route
 } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+// Components
 import Header from './components/common/AppHeader';
 import LoginPage from './components/login/LoginContainer';
 import Home from './components/home/Home'
-// import SignupPage from './components/signup/SignupPage';
 import ProfilePage from './components/profile/ProfilePageContainer';
+import VehiclesPage from './components/vehicles/VehiclesPage';
+
 import { styles, AppTheme as theme } from './AppThemes'
 import { withStyles } from 'material-ui/styles';
 
@@ -27,18 +30,17 @@ class App extends Component {
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <div className={classes.root}>
-            <div className={classes.appFrame}>
-              <Header classes={classes}></Header>
-              <main className={classes.content}>
-                <Router>
-                  <div>
-                    <Route path="/" exact component={Home} />
-                      <Route path="/login" component={LoginPage}/>
-                      <Route path="/profile" component={ProfilePage}/>
-                  </div>
-                </Router>
-              </main>
-            </div>
+            <main className={classes.content}>
+              <Router>
+                <div>
+                  <Header classes={classes}></Header>
+                  <Route path="/" exact component={Home} />
+                    <Route path="/login" component={LoginPage}/>
+                    <Route path="/profile" component={ProfilePage}/>
+                    <Route path="/vehicles" component={VehiclesPage} />
+                </div>
+              </Router>
+            </main>
           </div>
         </MuiThemeProvider>
       </Provider>

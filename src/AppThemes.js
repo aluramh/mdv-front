@@ -19,13 +19,6 @@ const styles = theme => ({
     zIndex: 1,
     overflow: 'hidden',
   },
-  appFrame: {
-    // position: 'relative',
-    // display: 'flex',
-    // width: '100%',
-    height: '100%',
-    minHeight: '430px'
-  },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
