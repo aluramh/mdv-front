@@ -20,8 +20,7 @@ class VehiclesPage extends Component {
         'foto_vehiculo', 'modelo', 'nombre_empresa',
         'num_placa', 'conductor', 'year', 'descripcion',
         'equipo_extra', 'nombre_marca', 'id_carro'
-      ],
-      id: 2
+      ]
     }
     vehiclesApi.getVehicles(filters, rows => {
       this.setState({ vehicles: rows })

@@ -1,27 +1,31 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import InboxIcon from 'material-ui-icons/Inbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
 
-const DrawerItems = ({classes}) => {
+const DrawerItems = ({ history }) => {
   return (
     <div>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/vehicles')}>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
-          <ListItemText primary="Inbox" />
+          <ListItemText primary="Vehicles"/>
         </ListItem>
-        <ListItem button>
+
+        <ListItem button onClick={() => history.push('/polizas')}>>
           <ListItemIcon>
             <DraftsIcon />
           </ListItemIcon>
-          <ListItemText primary="Drafts" />
+          <ListItemText primary="Polizas" />
         </ListItem>
       </List>
+
       <Divider />
+
       <List>
         <ListItem button>
           <ListItemText primary="Trash" />
@@ -34,4 +38,4 @@ const DrawerItems = ({classes}) => {
   );
 }
 
-export default DrawerItems;
+export default withRouter(DrawerItems);

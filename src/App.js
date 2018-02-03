@@ -11,6 +11,7 @@ import LoginPage from './components/login/LoginContainer';
 import Home from './components/home/Home'
 import ProfilePage from './components/profile/ProfilePageContainer';
 import VehiclesPage from './components/vehicles/VehiclesPage';
+import PolizasPage from './components/polizas'
 
 import { styles, AppTheme as theme } from './AppThemes'
 import { withStyles } from 'material-ui/styles';
@@ -38,6 +39,7 @@ class App extends Component {
                     <Route path="/login" component={LoginPage}/>
                     <Route path="/profile" component={ProfilePage}/>
                     <Route path="/vehicles" component={VehiclesPage} />
+                    <Route path="/polizas" component={PolizasPage} />
                 </div>
               </Router>
             </main>
