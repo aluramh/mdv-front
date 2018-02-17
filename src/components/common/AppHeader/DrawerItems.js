@@ -1,9 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import InboxIcon from 'material-ui-icons/Inbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
+import {
+  DirectionsCar as CarIcon,
+  ViewList as ViewListIcon
+} from 'material-ui-icons';
 
 const DrawerItems = ({ history }) => {
   return (
@@ -11,27 +12,16 @@ const DrawerItems = ({ history }) => {
       <List>
         <ListItem button onClick={() => history.push('/vehicles')}>
           <ListItemIcon>
-            <InboxIcon />
+            <CarIcon />
           </ListItemIcon>
           <ListItemText primary="Vehicles"/>
         </ListItem>
 
-        <ListItem button onClick={() => history.push('/polizas')}>>
+        <ListItem button onClick={() => history.push('/polizas')}>
           <ListItemIcon>
-            <DraftsIcon />
+            <ViewListIcon />
           </ListItemIcon>
           <ListItemText primary="Polizas" />
-        </ListItem>
-      </List>
-
-      <Divider />
-
-      <List>
-        <ListItem button>
-          <ListItemText primary="Trash" />
-        </ListItem>
-        <ListItem button component="a" href="#simple-list">
-          <ListItemText primary="Spam" />
         </ListItem>
       </List>
     </div>

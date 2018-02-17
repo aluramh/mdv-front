@@ -1,3 +1,9 @@
-.polizas-container {
-  overflow-x: auto;
+.polizas-page {
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+.spacer {
+  flex: 1 1 100%;
 }
